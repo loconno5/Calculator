@@ -79,8 +79,6 @@ public class Calculator {
 				count++;
 			}
 		}
-		result = result + (int) numbers.get(0);
-
 		for (int t = 0; t < operators.size(); t++) {
 			char oper = (char) operators.get(t);
 			if (oper == '-') {
