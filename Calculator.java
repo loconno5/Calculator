@@ -67,19 +67,29 @@ public class Calculator {
 		}
 
 		int result = 0;
-		result = result + (int) numbers.get(0);
+		int num = 0;
+		ArrayList patternNUM = new ArrayList<>();
+		ArrayList patternOP = new ArrayList<>();
 		for (int t = 0; t < operators.size(); t++) {
 			char oper = (char) operators.get(t);
 			if (oper == '*') {
-				result = (int) numbers.get(t) * (int) numbers.get(t);
+				int ans = (int) numbers.get(num) * (int) numbers.get(num + 1);
+				patternNUM.add(ans);
+				num++;
+			} else {
+				patternNUM.add(numbers.get(num));
+				patternOP.add(operators.get(t));
 			}
+			num++;
 		}
-		for (int t = 0; t < operators.size(); t++) {
-			char oper = (char) operators.get(t);
+		result = result + (int) numbers.get(0);
+
+		for (int t = 0; t < patternOP.size(); t++) {
+			char oper = (char) patternOP.get(t);
 			if (oper == '-') {
-				result = result - (int) numbers.get(t + 1);
+				result = result - (int) patternNUM.get(t + 1);
 			} else if (oper == '+') {
-				result = result + (int) numbers.get(t + 1);
+				result = result + (int) patternNUM.get(t + 1);
 			}
 		}
 
