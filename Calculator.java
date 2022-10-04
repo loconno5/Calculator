@@ -78,15 +78,16 @@ public class Calculator {
 			} else {
 				count++;
 			}
+			num++;
 		}
 		result = result + (int) numbers.get(0);
 
 		for (int t = 0; t < operators.size(); t++) {
 			char oper = (char) operators.get(t);
 			if (oper == '-') {
-				result = result - (int) numbers.get(t + 1);
+				result = result - (int) patternNUM.get(t + 1);
 			} else if (oper == '+') {
-				result = result + (int) numbers.get(t + 1);
+				result = result + (int) patternNUM.get(t + 1);
 			}
 		}
 
