@@ -100,5 +100,36 @@ public class Calculator {
 		}
 		return false;
 	}
+	static boolean validate(String equation, int length) {
+		String character = "";
+		char curr = '0';
+		int opCount = 0;
+		boolean valid = true;
+		for (int i = 0; i < length; i++) {
+			curr = equation.charAt(i);
+			if (isDigit(curr)) {
+				character = "num";
+			} else if (curr == '+' || curr == '-' || curr == '*') {
+				character = "op";
+			} else {
+				return false; // false if non-numeric / operator characters entered
+			}
+
+			switch (character) {
+				case "num":
+					opCount = 0;
+					break;
+				case "op":
+					opCount++;
+					if (opCount > 1 || i == 0) { // false if more than 1 operators in a row or starts with operator
+						return false;
+					}
+					break;
+
+			}
+
+		}
+		return valid;
+	}
 
 }
