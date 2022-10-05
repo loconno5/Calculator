@@ -7,14 +7,6 @@ public class Calculator {
 		boolean quit = false;
 		Scanner input = new Scanner(System.in);
 
-
-		/* System.out.print("Enter Equation: ");
-		Scanner input = new Scanner(System.in);
-		String equation = input.nextLine();
-		int length = equation.length();
-		ArrayList numbers = new ArrayList<>();
-		ArrayList operators = new ArrayList<>();
-		equation = equation + " "; */
 		while (!quit) {
 			System.out.println("Enter Equation: or 'quit' to quit ");
 			String equation = input.nextLine();
@@ -29,7 +21,8 @@ public class Calculator {
 			} else {
 
 				if (validate(equation, length) == true) {
-					compute(equation, length, operators, numbers);
+					int result = compute(equation, length, operators, numbers);
+					System.out.println(result);
 					
 				} else if (validate(equation, length) != true) {
 					System.out.print("Sorry, that is not a valid equation.\nPlease try again:");
@@ -38,7 +31,7 @@ public class Calculator {
 		}
 	}
 
-static void compute(String equation,int length, ArrayList operators, ArrayList numbers) {
+static int compute(String equation,int length, ArrayList operators, ArrayList numbers) {
 		for (int i = 0; i < length; i++) {
 			if ((i <= length - 1)) {
 				if (isDigit(equation.charAt(i)) && isDigit(equation.charAt(i + 1)) && isDigit(equation.charAt(i + 2))
@@ -119,8 +112,8 @@ static void compute(String equation,int length, ArrayList operators, ArrayList n
 			}
 		}
 
-		System.out.println(result);
-
+		
+        return result;
 	}
 	
 
