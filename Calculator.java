@@ -3,14 +3,42 @@ import java.util.*;
 public class Calculator {
 
 	public static void main(String[] args) {
-		System.out.print("Enter Equation: ");
+		System.out.println("Welcome to the simple java calculator.");
+		boolean quit = false;
+		Scanner input = new Scanner(System.in);
+
+
+		/* System.out.print("Enter Equation: ");
 		Scanner input = new Scanner(System.in);
 		String equation = input.nextLine();
 		int length = equation.length();
 		ArrayList numbers = new ArrayList<>();
 		ArrayList operators = new ArrayList<>();
-		equation = equation + " ";
+		equation = equation + " "; */
+		while (!quit) {
+			System.out.println("Enter Equation: or 'quit' to quit ");
+			String equation = input.nextLine();
+			int length = equation.length();
+			ArrayList numbers = new ArrayList<>();
+			ArrayList operators = new ArrayList<>();
+			equation = equation + " ";
 
+			if (equation.equalsIgnoreCase("quit ")) {
+				System.out.println("Goodbye.");
+				quit = true;
+			} else {
+
+				if (validate(equation, length) == true) {
+					compute(equation, length, operators, numbers);
+					
+				} else if (validate(equation, length) != true) {
+					System.out.print("Sorry, that is not a valid equation.\nPlease try again:");
+				}
+			}
+		}
+	}
+
+static void compute(String equation,int length, ArrayList operators, ArrayList numbers) {
 		for (int i = 0; i < length; i++) {
 			if ((i <= length - 1)) {
 				if (isDigit(equation.charAt(i)) && isDigit(equation.charAt(i + 1)) && isDigit(equation.charAt(i + 2))
@@ -63,8 +91,9 @@ public class Calculator {
 					operators.add(equation.charAt(i));
 				}
 
-			}
+			
 		}
+	}
 
 		int result = 0;
 		int count = 0;
@@ -92,6 +121,39 @@ public class Calculator {
 
 		System.out.println(result);
 
+	}
+	
+
+	static boolean validate(String equation, int length) {
+		String character = "";
+		char curr = '0';
+		int opCount = 0;
+		boolean valid = true;
+		for (int i = 0; i < length; i++) {
+			curr = equation.charAt(i);
+			if (isDigit(curr)) {
+				character = "num";
+			} else if (curr == '+' || curr == '-' || curr == '*') {
+				character = "op";
+			} else {
+				return false; // false if non-numeric / operator characters entered
+			}
+
+			switch (character) {
+				case "num":
+					opCount = 0;
+					break;
+				case "op":
+					opCount++;
+					if (opCount > 1 || i == 0) { // false if more than 1 operators in a row or starts with operator
+						return false;
+					}
+					break;
+
+			}
+
+		}
+		return valid;
 	}
 
 	static boolean isDigit(char check) {
