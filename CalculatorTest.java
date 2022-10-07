@@ -6,9 +6,8 @@ import org.junit.Test;
 public class CalculatorTest {
 
 	@Test
-	public void testMain() {
-		String str = "1+2";
-		//str.main();
+	public void testConstructor() {
+		new Calculator();
 	}
 	
 	@Test
@@ -22,6 +21,9 @@ public class CalculatorTest {
 		assertTrue(calc.validate(eq2, length2));
 		String eq3 = "2-3*45+89076";
 		int length3 = 12;
+		assertTrue(calc.validate(eq3, length3));
+		String eq4 = "2-3*45+89076-23+77*6-9-0+8";
+		int length4 = 26;
 		assertTrue(calc.validate(eq3, length3));
 		
 	}
@@ -38,6 +40,9 @@ public class CalculatorTest {
 		String eq3 = "-23";
 		int length3 = 3;
 		assertFalse(calc.validate(eq3, length3));
+		String eq4 = "++++";
+		int length4 = 4;
+		assertFalse(calc.validate(eq4, length4));
 		
 	}
 	@Test
@@ -63,7 +68,11 @@ public class CalculatorTest {
 		String eq3 = "2*56-59+20 ";
 		int length3 = 10;
 		assertEquals("testing compute method", 73,(calc.compute(eq3, length3 ,operators3,numbers3)));
-		
+		ArrayList numbers4 = new ArrayList<>();
+		ArrayList operators4 = new ArrayList<>();
+		String eq4 = "2*56-59+20+67-99+0-43+2 ";
+		int length4 = 23;
+		assertEquals("testing compute method", 0,(calc.compute(eq4, length4 ,operators4,numbers4)));
 		
 		
 	}
